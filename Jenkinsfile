@@ -7,9 +7,12 @@ pipeline {
         string(name: 'workspace', defaultValue : 'apache-server', description: "Name of the workspace")
     }
     stages {
-        stage('checkout') {
+        stage ('Cloning Script') {
             steps {
-                git  'https://github.com/kaza514/terr.git'
+                checkout([$class: 'GitSCM', 				
+				branches: [[name: "origin/master"]], 
+				userRemoteConfigs: [[
+                url: 'https://github.com/kaza514/terr.git']]])
             }
         }
         stage('TF Plan') {
@@ -22,6 +25,7 @@ pipeline {
                         sh """
                         ls -l
                         pwd
+                        hostname
                         terraform init
                         terraform workspace new ${params.workspace} || true
                         terraform workspace select ${params.workspace}
