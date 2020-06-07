@@ -20,6 +20,8 @@ pipeline {
                 script {
                     dir('terraform_apacheSrever') {
                         sh """
+                        ls -l
+                        pwd
                         terraform init
                         terraform workspace new ${params.workspace} || true
                         terraform workspace select ${params.workspace}
