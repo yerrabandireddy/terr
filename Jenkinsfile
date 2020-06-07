@@ -22,9 +22,6 @@ pipeline {
             steps {
                 script {
                         sh """
-                        ls -l
-                        pwd
-                        hostname
                         terraform init
                         terraform workspace new ${params.workspace} || true
                         terraform workspace select ${params.workspace}
