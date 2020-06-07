@@ -3,7 +3,7 @@ provider  "aws" {
 }
 
 resource "aws_instance" "testinstance"{
-   count = "${length(var.no_of_instances)}"
+   count = 3
    ami = "${var.ami}"
    instance_type = "${var.instance_type}"
    key_name = "${var.key}"
