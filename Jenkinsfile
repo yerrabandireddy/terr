@@ -29,7 +29,6 @@ pipeline {
                         }
                     }
                 }
-            }
         }
         stage('TF Apply') {
           when {
@@ -44,7 +43,6 @@ pipeline {
                         }
                     }
                 }
-            }
         }
         stage('TF Destroy') {
           when {
@@ -60,6 +58,6 @@ pipeline {
                         }
                     }
                 }
-            }
+        }
+    }        
 }
-
