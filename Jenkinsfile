@@ -4,7 +4,7 @@ pipeline {
     }
     parameters {
         choice(name: 'action', choices: 'create\ndestroy', description: 'Create/update or destroy the apache-server')
-        string(name: 'workspace', defaultValue : 'apache-server', description: "Name of the workspace")
+        string(name: 'workspace', description: "Name of the workspace")
     }
     stages {
         stage ('Cloning Script') {
