@@ -12,23 +12,6 @@ pipeline {
                 git 'https://github.com/kaza514/terr.git'
             }
         }
-        stage('Setup') {
-            steps {
-                script {
-                    currentBuild.displayName = "#" + env.BUILD_NUMBER + " " + params.action + " apache-server"
-                    plan = params.workspace + '.plan'
-                }
-            }
-        }
-        stage('Set Terraform path') {
-            steps {
-                script {
-                    def tfHome = tool name: 'terraform'
-                    env.PATH = "${tfHome}:${env.PATH}"
-                }
-                sh 'terraform -version'
-            }
-        }
         stage('TF Plan') {
             when {
                 expression { params.action == 'create' }
@@ -41,7 +24,7 @@ pipeline {
                         terraform workspace new ${params.workspace} || true
                         terraform workspace select ${params.workspace}
                         terraform plan \
-                        -out ${plan}
+                        -out
                         """
                         }
                     }
@@ -56,7 +39,7 @@ pipeline {
             script {
                     dir('terraform_apacheSrever') {
                         sh """ 
-                        terraform apply -input=false -auto-approve ${plan}
+                        terraform apply -input=false -auto-approve
                         """
                         }
                     }
