@@ -23,8 +23,7 @@ pipeline {
                         terraform init
                         terraform workspace new ${params.workspace} || true
                         terraform workspace select ${params.workspace}
-                        terraform plan \
-                        -out
+                        terraform plan
                         """
                         }
                     }
