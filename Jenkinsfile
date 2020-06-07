@@ -21,7 +21,6 @@ pipeline {
             }
             steps {
                 script {
-                    dir('terraform_apacheSrever') {
                         sh """
                         ls -l
                         pwd
@@ -31,7 +30,6 @@ pipeline {
                         terraform workspace select ${params.workspace}
                         terraform plan
                         """
-                        }
                     }
                 }
         }
@@ -41,11 +39,9 @@ pipeline {
           }
           steps {
             script {
-                    dir('terraform_apacheSrever') {
                         sh """ 
                         terraform apply -input=false -auto-approve
                         """
-                        }
                     }
                 }
         }
@@ -55,12 +51,10 @@ pipeline {
           }
           steps {
             script {
-                    dir('terraform_apacheSrever') {
                         sh """ 
                         terraform workspace select ${params.workspace}
                         terraform destroy -auto-approve
                         """
-                        }
                     }
                 }
         }
