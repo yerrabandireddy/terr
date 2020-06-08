@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'Lable1'
+        label 'java'
     }
     parameters {
         choice(name: 'action', choices: 'create\ndestroy', description: 'Create/update or destroy the apache-server')
